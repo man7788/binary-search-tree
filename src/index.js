@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
 import './style.css';
 
 const Node = (data, left, right) => ({ data, left, right });
@@ -40,8 +42,6 @@ const buildTree = (array) => {
   return root;
 };
 
-const diu = Tree([19, 2, 28, 4, 32, 18, 26, 48]);
-
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node.right !== null) {
     prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
@@ -52,6 +52,46 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
+// Insert, only add as a leaf, no duplication
+// Compare to each node, until reaches a leaf
+
+const insert = (node, num) => {
+  // Compare num with root
+  // Return if num is same as root
+  if (num === node.data) {
+    return;
+  }
+
+  // Until reaches node with no left/right subtree
+  if (node.left === null) {
+    node.left = Node(num, null, null);
+    return;
+  }
+  if (node.right === null) {
+    node.right = Node(num, null, null);
+    return;
+  }
+
+  // Recursive call left node if smaller than root
+  if (num < node.data) {
+    return insert(node.left, num);
+  }
+  // Recursive call right node if bigger than root
+  if (num > node.data) {
+    return insert(node.right, num);
+  }
+};
+
+// Delete,
+// delete leaf, structure won't change
+// delete one child, remove node, point parent to child
+// delete two children, find next biggest (right subtree)
+// // next biggest has no left subtree
+// // replace next biggest with delete
+
+const diu = Tree([19, 2, 28, 4, 32, 18, 26, 48]);
+
 console.log(sortArray([19, 2, 28, 4, 32, 18, 26, 48]));
+// insert(diu, 5);
 console.log(diu);
 prettyPrint(diu);
