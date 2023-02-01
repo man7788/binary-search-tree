@@ -89,9 +89,99 @@ const insert = (node, num) => {
 // // next biggest has no left subtree
 // // replace next biggest with delete
 
-const diu = Tree([19, 2, 28, 4, 32, 18, 26, 48]);
+const deleteNode = (node, num, parent, nb) => {
+  // Return, if reaches leaf with no match
+  if (num !== node.data && node.left === null && node.right === null) {
+    return console.log('No match found.');
+  }
+  // Match num with node
+  if (num !== node.data) {
+    if (num < node.data) {
+      parent = node;
+      return deleteNode(node.left, num, parent);
+    }
+    if (num > node.data) {
+      parent = node;
+      return deleteNode(node.right, num, parent);
+    }
+  }
 
-console.log(sortArray([19, 2, 28, 4, 32, 18, 26, 48]));
+  // When found match
+  if (num === node.data) {
+    if (parent === undefined && node.left === null && node.right === null) {
+      node.data = null;
+    }
+    // // Set node parent left/right null
+    else if (node.left === null && node.right === null) {
+      if (parent.left !== null && parent.left.data === node.data) {
+        parent.left = null;
+      } else if (parent.right.data === node.data) {
+        parent.right = null;
+      }
+    }
+    // // Set node parent left/right with delete node children
+    if (node.left === null && node.right !== null) {
+      if (parent === undefined) {
+        const temp = node.right;
+        node.data = temp.data;
+        node.left = temp.left;
+        node.right = temp.right;
+      } else if (parent.left.data === node.data) {
+        parent.left = node.right;
+      } else if (parent.right.data === node.data) {
+        parent.right = node.right;
+      }
+    } else if (node.left !== null && node.right === null) {
+      if (parent === undefined) {
+        const temp = node.left;
+        node.data = temp.data;
+        node.left = temp.left;
+        node.right = temp.right;
+      } else if (parent.left.data === node.data) {
+        parent.left = node.left;
+      } else if (parent.right.data === node.data) {
+        parent.right = node.left;
+      }
+    }
+    // // Recursive node.right until node.left === null
+    // // Set node parent data to next biggest
+    if (node.left !== null && node.right !== null) {
+      console.log('2child', nb);
+      if (nb === undefined) {
+        parent = null;
+        nb = node.right;
+        return deleteNode(node, num, parent, nb);
+      }
+      if (nb.left !== null) {
+        parent = nb;
+        nb = nb.left;
+        return deleteNode(node, num, parent, nb);
+      }
+      if (nb.left === null) {
+        node.data = nb.data;
+        if (parent !== null) {
+          parent.left = null;
+        } else {
+          node.right = nb.right;
+        }
+      }
+    }
+  }
+};
+
+const diu = Tree([16, 2, 4, 18, 27, 3, 19, 32, 48]);
+
+console.log(sortArray([16, 2, 4, 18, 27, 3, 19, 32, 48]));
 // insert(diu, 5);
+// deleteNode(diu, 16);
+// deleteNode(diu, 4);
+// deleteNode(diu, 2);
+// deleteNode(diu, 3);
+// deleteNode(diu, 48);
+// deleteNode(diu, 32);
+// deleteNode(diu, 19);
+// deleteNode(diu, 27);
+// deleteNode(diu, 18);
+
 console.log(diu);
 prettyPrint(diu);
