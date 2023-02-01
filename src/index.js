@@ -146,7 +146,6 @@ const deleteNode = (node, num, parent, nb) => {
     // // Recursive node.right until node.left === null
     // // Set node parent data to next biggest
     if (node.left !== null && node.right !== null) {
-      console.log('2child', nb);
       if (nb === undefined) {
         parent = null;
         nb = node.right;
@@ -169,6 +168,27 @@ const deleteNode = (node, num, parent, nb) => {
   }
 };
 
+const find = (node, num) => {
+  // Return, if reaches leaf with no match
+  if (num !== node.data && node.left === null && node.right === null) {
+    return console.log('No match found.');
+  }
+  // Match num with node
+  if (num !== node.data) {
+    if (num < node.data) {
+      return find(node.left, num);
+    }
+    if (num > node.data) {
+      return find(node.right, num);
+    }
+  }
+
+  // When found match
+  if (num === node.data) {
+    return console.log(node);
+  }
+};
+
 const diu = Tree([16, 2, 4, 18, 27, 3, 19, 32, 48]);
 
 console.log(sortArray([16, 2, 4, 18, 27, 3, 19, 32, 48]));
@@ -182,6 +202,7 @@ console.log(sortArray([16, 2, 4, 18, 27, 3, 19, 32, 48]));
 // deleteNode(diu, 19);
 // deleteNode(diu, 27);
 // deleteNode(diu, 18);
+// find(diu, 19);
 
 console.log(diu);
 prettyPrint(diu);
