@@ -6,6 +6,7 @@ import prettyPrint from './pretty-print';
 import insert from './insert';
 import deleteNode from './delete';
 import find from './find';
+import { levelOrder, print } from './level-order';
 
 const diu = Tree([16, 2, 4, 18, 27, 3, 19, 32, 48]);
 
@@ -21,6 +22,8 @@ console.log(sortArray([16, 2, 4, 18, 27, 3, 19, 32, 48]));
 // deleteNode(diu, 27);
 // deleteNode(diu, 18);
 // find(diu, 19);
+// console.log(levelOrder(diu));
+// levelOrder(diu, print);
 
 console.log(diu);
 prettyPrint(diu);
