@@ -2,7 +2,7 @@
 const find = (node, num) => {
   // Return, if reaches leaf with no match
   if (num !== node.data && node.left === null && node.right === null) {
-    return console.log('No match found.');
+    return 'No match found.';
   }
   // Match num with node
   if (num !== node.data) {
@@ -16,7 +16,7 @@ const find = (node, num) => {
 
   // When found match
   if (num === node.data) {
-    return console.log(node);
+    return node;
   }
 };
 
