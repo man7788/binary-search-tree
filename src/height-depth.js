@@ -52,6 +52,18 @@ const height = (node, value) => {
   return result[0];
 };
 
-const depth = (node) => {};
+const depth = (node, value, count = 0) => {
+  if (value === node.data) {
+    return count;
+  }
+
+  if (value > node.data) {
+    return depth(node.right, value, count + 1);
+  }
+
+  if (value < node.data) {
+    return depth(node.left, value, count + 1);
+  }
+};
 
 export { height, depth };
