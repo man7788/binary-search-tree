@@ -1,3 +1,5 @@
+import { buildTree } from './build-tree';
+
 const isBalanced = (node) => {
   const left = [];
   const right = [];
@@ -47,7 +49,6 @@ const isBalanced = (node) => {
   right.push(count3, count4);
   left.sort((a, b) => b - a);
   right.sort((a, b) => b - a);
-  console.log(left, right);
 
   if (left[0] - right[0] <= 1) {
     return true;
@@ -55,6 +56,22 @@ const isBalanced = (node) => {
   return false;
 };
 
-const rebalance = (node) => {};
+const rebalance = (node) => {
+  const array = [];
+
+  const travelAll = (child) => {
+    array.push(child.data);
+    if (child.left !== null) {
+      travelAll(child.left);
+    }
+    if (child.right !== null) {
+      travelAll(child.right);
+    }
+  };
+
+  travelAll(node);
+  const balanced = buildTree(array);
+  return balanced;
+};
 
 export { isBalanced, rebalance };

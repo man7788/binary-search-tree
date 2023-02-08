@@ -45,10 +45,9 @@ const buildUnblcTree = (array) => {
   }
 
   const sorted = sortArray(array);
-  // console.log(sorted);
-  sorted.shift();
 
-  const root = Node(sorted[0], buildUnblcTree(sorted), null);
+  const root = Node(sorted[0], buildUnblcTree(sorted.slice(1)), null);
+
   return root;
 };
 
