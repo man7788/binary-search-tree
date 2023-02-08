@@ -49,6 +49,7 @@ const height = (node, value) => {
 
   result.push(count1, count2, count3, count4);
   result.sort((a, b) => b - a);
+  console.log(result);
   return result[0];
 };
 

@@ -1,6 +1,7 @@
 const Node = (data, left, right) => ({ data, left, right });
 
 const Tree = (array) => buildTree(array);
+const unblcTree = (array) => buildUnblcTree(array);
 
 const sortArray = (array) => {
   const unique = [];
@@ -38,4 +39,17 @@ const buildTree = (array) => {
   return root;
 };
 
-export { Node, Tree, sortArray, buildTree };
+const buildUnblcTree = (array) => {
+  if (array.length === 0) {
+    return null;
+  }
+
+  const sorted = sortArray(array);
+  // console.log(sorted);
+  sorted.shift();
+
+  const root = Node(sorted[0], buildUnblcTree(sorted), null);
+  return root;
+};
+
+export { Node, Tree, sortArray, buildTree, unblcTree };
