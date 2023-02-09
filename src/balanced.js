@@ -49,10 +49,20 @@ const isBalanced = (node) => {
   right.push(count3, count4);
   left.sort((a, b) => b - a);
   right.sort((a, b) => b - a);
+  console.log(left, right);
 
-  if (left[0] - right[0] <= 1) {
+  if (left[0] > right[0]) {
+    if (left[0] - right[0] <= 1) return true;
+  }
+
+  if (right[0] > left[0]) {
+    if (right[0] - left[0] <= 1) return true;
+  }
+
+  if (left[0] === right[0]) {
     return true;
   }
+
   return false;
 };
 
